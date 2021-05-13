@@ -3,7 +3,7 @@ const app = express();
 require('./db/mongoose');
 const userRouter = require('./routes/user')
 const remRouter = require('./routes/reminder')
-const port = process.env.PORT || 3000;
+const port = process.env.PORT;
 
 
 app.use(express.json());
