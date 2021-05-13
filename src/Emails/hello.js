@@ -4,7 +4,7 @@ const sendRemider = (date, userName, reminderName, email, hours, minutes, second
     let defaultClient = SibApiV3Sdk.ApiClient.instance;
 
     let apiKey = defaultClient.authentications['api-key'];
-    apiKey.apiKey = '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';
+    apiKey.apiKey = process.env.SENDINBLUE_API_KEY;
 
     let apiInstance = new SibApiV3Sdk.ContactsApi();
 
