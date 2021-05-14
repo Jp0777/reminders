@@ -1,6 +1,17 @@
 const SibApiV3Sdk = require('sib-api-v3-sdk');
 
-const sendRemider = (date, userName, reminderName, email, hours, minutes, seconds) => {
+const sendRemider = (year, month, date, hours, minutes, seconds, userName, reminderName, email) => {
+    if (month < 10)
+        month = '0' + month
+    if (date < 10)
+        date = '0' + date
+    if (hours < 10)
+        hours = '0' + hours
+    if (minutes < 10)
+        minutes = '0' + minutes
+    if (seconds < 10)
+        seconds = '0' + seconds
+
     let defaultClient = SibApiV3Sdk.ApiClient.instance;
 
     let apiKey = defaultClient.authentications['api-key'];
@@ -16,6 +27,7 @@ const sendRemider = (date, userName, reminderName, email, hours, minutes, second
     let identifier;
 
     const update = (emailUpdate) => {
+        console.log("" + year + "-" + month + "-" + date + "T" + hours + ":" + minutes + ":" + seconds + "+05:30")
         apiInstance.getContacts(opts).then(function (data) {
             identifier = data["contacts"][0]["email"]
 
@@ -63,7 +75,7 @@ const sendRemider = (date, userName, reminderName, email, hours, minutes, second
     emailCampaigns = {
         tag: 'myTag',
         sender: { name: 'Jayen Patel', email: 'pateljayen07@gmail.com' }, name: 'My First Campaign',
-        scheduledAt: new Date(date + "T" + hours + ":" + minutes + ":" + seconds + "+05:30"),
+        scheduledAt: new Date("" + year + "-" + month + "-" + date + "T" + hours + ":" + minutes + ":" + seconds + "+05:30"),
         subject: ' My {{params.subject}}',
         replyTo: 'replyto@domain.com',
         toField: '{{contact.FIRSTNAME}} {{contact.LASTNAME}}',
